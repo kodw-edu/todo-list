@@ -1,33 +1,56 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
+import { Box, Button, Checkbox, Divider, IconButton, List, ListItem, ListItemText, TextField } from '@mui/material';
+import { Delete as DeleteIcon } from '@mui/icons-material';
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [itemList, setItemList] = useState([]);
+  const [textFieldValue, setTextFieldValue] = useState("");
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Todo List</h1>
+      <Box display="flex" flexDirection="row" justifyContent={['space-between']}>
+        <TextField
+          fullWidth
+          hiddenLabel
+          label="Search field"
+          type="search"
+          variant="standard"
+          onChange={(e) => {
+            // Todo: use setTextFieldValue
+          }}
+        />
+        <Box display="flex" paddingInlineStart="14px" paddingTop="10px">
+          <Button onClick={() => {
+            // Todo
+          }} variant='contained'>Add</Button>
+        </Box>
+      </Box>
+      <Divider />
+      <List>
+        {itemList.map((e, i) => {
+          return (
+            <div key={i}>
+              <ListItem
+                secondaryAction={
+                  <IconButton onClick={() => {
+                    // Todo: use filter function
+                  }} edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              >
+                  <Checkbox />
+                <ListItemText
+                  primary={e.title}
+                />
+              </ListItem>
+              <Divider />
+            </div>
+          )
+        })}
+
+      </List>
     </>
   )
 }
